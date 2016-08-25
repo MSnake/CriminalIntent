@@ -16,7 +16,6 @@ public class Crime {
     private Date date;
     private boolean solved;
 
-
     public Crime (){
         this.id = UUID.randomUUID();
         this.date = new Date();
@@ -49,5 +48,10 @@ public class Crime {
 
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }
