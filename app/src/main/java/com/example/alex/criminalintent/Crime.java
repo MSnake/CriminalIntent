@@ -2,6 +2,7 @@ package com.example.alex.criminalintent;
 
 import android.provider.ContactsContract;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
 

@@ -57,6 +57,8 @@ public class CrimeFragment extends Fragment {
         });
 
         dateButton = (Button) v.findViewById(R.id.crime_date);
+
+        Date d = new Date();
         dateButton.setText(crime.getDate().toString());
         dateButton.setEnabled(false);
 
