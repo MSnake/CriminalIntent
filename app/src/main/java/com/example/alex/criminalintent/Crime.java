@@ -1,5 +1,8 @@
 package com.example.alex.criminalintent;
 
+import android.provider.ContactsContract;
+
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -9,9 +12,30 @@ public class Crime {
 
     private UUID id;
     private String title;
+    private Date date;
+    private boolean solved;
+
 
     public Crime (){
-        id = UUID.randomUUID();
+        this.id = UUID.randomUUID();
+        this.date = new Date();
+    }
+
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
     }
 
     public String getTitle() {

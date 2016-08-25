@@ -5,10 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import java.util.Date;
 
 /**
  * Created by Alex on 22.08.2016.
@@ -17,6 +23,8 @@ public class CrimeFragment extends Fragment {
 
     private Crime crime;
     private TextView titleField;
+    private Button dateButton;
+    private CheckBox checkSolved;
 
 
     @Override
@@ -45,6 +53,19 @@ public class CrimeFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 //Пока не трогаем
+            }
+        });
+
+        dateButton = (Button) v.findViewById(R.id.crime_date);
+        dateButton.setText(crime.getDate().toString());
+        dateButton.setEnabled(false);
+
+        checkSolved = (CheckBox) v.findViewById(R.id.crime_solved);
+        checkSolved.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //Флаг раскрытия преступления
+                crime.setSolved(b);
             }
         });
 
