@@ -18,7 +18,7 @@ public class Crime {
 
     public Crime (){
         this.id = UUID.randomUUID();
-        this.date = new Date();
+        this.date = new Date(DateFormat.AM_PM_FIELD);
     }
 
 

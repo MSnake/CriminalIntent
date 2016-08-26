@@ -15,12 +15,14 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Alex on 22.08.2016.
  */
 public class CrimeFragment extends Fragment {
 
+    public static final String EXTRA_CRIME_ID="com.example.alex.criminalintent.crimeFragment";
     private Crime crime;
     private TextView titleField;
     private Button dateButton;
@@ -28,15 +30,26 @@ public class CrimeFragment extends Fragment {
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        crime = new Crime();
+        UUID newID = null;
+        if (getArguments().getSerializable(EXTRA_CRIME_ID) == null)
+        {
+            crime = new Crime();
+        }
+        else
+        {
+            newID = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
+            crime = CrimeData.getCrimes(getActivity()).getCrime(newID);
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_crime,parent,false);
         titleField = (TextView) v.findViewById(R.id.crime_title);
+        titleField.setText(crime.getTitle());
         titleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -58,11 +71,11 @@ public class CrimeFragment extends Fragment {
 
         dateButton = (Button) v.findViewById(R.id.crime_date);
 
-        Date d = new Date();
         dateButton.setText(crime.getDate().toString());
         dateButton.setEnabled(false);
 
         checkSolved = (CheckBox) v.findViewById(R.id.crime_solved);
+        checkSolved.setChecked(crime.isSolved());
         checkSolved.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -70,9 +83,18 @@ public class CrimeFragment extends Fragment {
                 crime.setSolved(b);
             }
         });
-
-
-
         return v;
     }
+
+    public static CrimeFragment newInstance(UUID crimeID)
+    {
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_CRIME_ID, crimeID);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+        return fragment;
+
+    }
+
+
 }
