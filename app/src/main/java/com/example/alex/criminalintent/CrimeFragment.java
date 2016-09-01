@@ -3,6 +3,7 @@ package com.example.alex.criminalintent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class CrimeFragment extends Fragment {
 
     public static final String EXTRA_CRIME_ID="com.example.alex.criminalintent.crimeFragment";
+    private static final String DIALOG_DATE="date";
     private Crime crime;
     private TextView titleField;
     private Button dateButton;
@@ -72,7 +74,16 @@ public class CrimeFragment extends Fragment {
         dateButton = (Button) v.findViewById(R.id.crime_date);
 
         dateButton.setText(crime.getDate().toString());
-        dateButton.setEnabled(false);
+        dateButton.setEnabled(true);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                DatePickerFragment dateFragment = new DatePickerFragment();
+                dateFragment.show(fm,DIALOG_DATE);
+
+            }
+        });
 
         checkSolved = (CheckBox) v.findViewById(R.id.crime_solved);
         checkSolved.setChecked(crime.isSolved());
