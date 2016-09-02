@@ -2,6 +2,7 @@ package com.example.alex.criminalintent;
 
 import android.provider.ContactsContract;
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -18,12 +19,17 @@ public class Crime {
 
     public Crime (){
         this.id = UUID.randomUUID();
-        this.date = new Date(DateFormat.AM_PM_FIELD);
+        this.date = new Date();
     }
 
 
     public Date getDate() {
         return date;
+    }
+
+
+    public void setTime(Date date){
+        this.date.setTime(date.getTime());
     }
 
     public void setDate(Date date) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ЧП</string>
+    <string name="crime_title_hint">Введите название ЧП</string>
+    <string name="crime_title_label">Заголовок</string>
+    <string name="crime_details_label">Детали</string>
+    <string name="crime_solved_label">Ракскрыт</string>
+    <string name="crimes_title">Проишествия</string>
+    <string name="date_picker_title">Дата ЧП:</string>
+    <string name="time_picker_title">Время ЧП:</string>
+    <string name="crime_date_title">Дата:</string>
+    <string name="crime_time_title">Время:</string>
+</resources>
